@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-mascara-pestanas" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-mascara-pestanas" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FF7CBC"/>
+    <stop offset="100%" stop-color="#EC008C"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-mascara-pestanas)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#FF7CBC" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#EC008C" opacity="0.18"/>
+  
+    <path d="M290 108h40l14 176h-68z" fill="#6E42B5"/>
+    <rect x="272" y="278" width="76" height="212" rx="22" fill="url(#body-mascara-pestanas)"/>
+    <rect x="288" y="306" width="14" height="152" rx="7" fill="#FFFFFF" opacity="0.28"/>
+    
+  <rect x="276" y="344" width="68" height="92" rx="10" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="294" y="377" width="32" height="7" rx="3.5" fill="#6E42B5" opacity="0.55"/>
+  <rect x="294" y="392" width="19.2" height="7" rx="3.5" fill="#6E42B5" opacity="0.5"/>
+</svg>

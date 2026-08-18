@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-base-maquillaje" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-base-maquillaje" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FFA8D2"/>
+    <stop offset="100%" stop-color="#F050A6"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-base-maquillaje)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#FFA8D2" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#F050A6" opacity="0.18"/>
+  
+    <path d="M300 96h44a12 12 0 0 1 0 24h-20v42h-24z" fill="#8253C7"/>
+    <rect x="286" y="150" width="30" height="46" rx="8" fill="#8253C7"/>
+    <rect x="224" y="188" width="152" height="300" rx="32" fill="url(#body-base-maquillaje)"/>
+    <rect x="246" y="214" width="20" height="226" rx="10" fill="#FFFFFF" opacity="0.28"/>
+    
+  <rect x="226" y="288" width="148" height="128" rx="12" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="244" y="339" width="112" height="7" rx="3.5" fill="#8253C7" opacity="0.55"/>
+  <rect x="244" y="354" width="67.2" height="7" rx="3.5" fill="#6E42B5" opacity="0.5"/>
+</svg>

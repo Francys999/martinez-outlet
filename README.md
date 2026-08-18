@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Martinez Outlet — Catálogo web
 
-## Getting Started
+Catálogo online de productos de belleza, cuidado personal y aseo, con carrito
+frontend y pedidos por WhatsApp. **No** incluye pagos online, login ni backend.
 
-First, run the development server:
+Stack: Next.js 16 (App Router) · TypeScript · React 19 · Tailwind CSS v4 ·
+lucide-react.
+
+## Ejecutar el proyecto
+
+```bash
+npm install
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Luego abre http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Otros comandos:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+```bash
+npm run lint
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Lo que tienes que configurar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Número de WhatsApp (obligatorio)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Archivo: `src/lib/config.ts`
 
-## Deploy on Vercel
+```ts
+export const WHATSAPP_NUMBER = "519XXXXXXXXX"; // ← reemplázalo
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Formato internacional, solo dígitos, sin `+`, sin espacios ni guiones.
+Perú: `51` + los 9 dígitos del celular → `51987654321`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Mientras el valor tenga "X", los botones de WhatsApp no abren el enlace: muestran
+un aviso indicando que falta configurar el número.
+
+### 2. Logo — ya configurado
+
+El logo está en `public/logo.png` (círculo con fondo transparente, 384×384, generado a
+partir de `public/logo.jpg`). Se usa en navbar, hero, "Sobre nosotros" y footer.
+En navbar y footer se muestra junto al nombre de la marca, porque el texto dentro
+del círculo sería ilegible a ese tamaño.
+
+Para cambiarlo, reemplaza `public/logo.png` por otro PNG (idealmente cuadrado y con
+fondo transparente). Si el archivo faltara, la web muestra un logotipo vectorial de
+respaldo en vez de romperse.
+
+### 3. Productos
+
+Archivo: `src/data/products.ts` — un solo arreglo con todos los productos.
+
+```ts
+{
+  id: "skc-serum-vitamina-c",   // único
+  name: "Sérum Facial Vitamina C",
+  category: "skincare",          // skincare | maquillaje | cuidado-capilar | aseo-personal | accesorios
+  price: 39.9,
+  previousPrice: 55.0,           // opcional (precio tachado)
+  image: "/products/serum-facial.svg",
+  description: "…",
+  featured: true,                // opcional: aparece primero
+  offer: true,                   // opcional: badge de oferta + filtro "Ofertas"
+  size: "30 ml",                 // opcional
+}
+```
+
+Las imágenes van en `public/products/`. Las incluidas son ilustraciones propias
+en SVG (sin marcas registradas); puedes reemplazarlas por fotos reales
+(`.jpg` / `.webp`, preferiblemente cuadradas) y actualizar el campo `image`.
+
+### 4. Redes sociales, dirección y horarios
+
+Archivo: `src/lib/config.ts` → `SOCIAL_LINKS` y `CONTACT_INFO`.
+Están en `null` a propósito: no se inventó ningún dato. En cuanto pongas una URL
+o un texto, el enlace o el bloque aparece solo en la sección de contacto y en el
+footer.
+
+## Estructura
+
+```text
+src/
+├── app/
+│   ├── layout.tsx           SEO, metadata, Open Graph, fuentes
+│   ├── page.tsx             composición de la landing
+│   ├── providers.tsx        carrito + filtros + avisos (client)
+│   ├── globals.css          design tokens de marca (Tailwind v4)
+│   ├── icon.svg             favicon
+│   └── opengraph-image.tsx  imagen para redes (generada)
+├── components/
+│   ├── Navbar · Hero · Categories · Catalog · Benefits · About · Contact · Footer
+│   ├── ProductCard · ProductGrid · ProductModal · SearchBar · Filters
+│   ├── Cart · CartItem · WhatsAppFab · Logo
+│   └── ui/  QuantityStepper · WhatsAppButton · SectionHeading · Reveal · Toaster
+├── context/
+│   ├── CartContext.tsx      carrito (localStorage, sin backend)
+│   └── CatalogContext.tsx   búsqueda, categoría, orden, ofertas
+├── data/
+│   ├── products.ts          👈 catálogo
+│   └── categories.ts
+├── lib/
+│   ├── config.ts            👈 WhatsApp, redes, contacto
+│   ├── whatsapp.ts          armado del mensaje del pedido
+│   └── format.ts            precios (S/) y descuentos
+└── types/product.ts         Product, CartItem, filtros
+```
+
+## Preparado para una versión futura con backend
+
+- `src/types/product.ts` define el contrato de datos: basta con que la API
+  devuelva la misma forma para reemplazar `src/data/products.ts`.
+- `src/data/products.ts` está aislado: ningún componente tiene productos
+  hardcodeados.
+- `src/lib/config.ts` centraliza los datos del negocio (número, redes, contacto).
+- El carrito vive en `CartContext` con una API mínima (`addItem`, `removeItem`,
+  `updateQuantity`, `clearCart`), fácil de conectar luego a un backend de pedidos.
+- `buildOrderMessage()` genera el pedido a partir del carrito: el mismo objeto
+  puede enviarse a una API cuando exista.

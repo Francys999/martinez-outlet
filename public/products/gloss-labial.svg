@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-gloss-labial" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-gloss-labial" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FF7CBC"/>
+    <stop offset="100%" stop-color="#EC008C"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-gloss-labial)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#FF7CBC" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#EC008C" opacity="0.18"/>
+  
+    <rect x="276" y="150" width="48" height="146" rx="14" fill="#6E42B5"/>
+    <rect x="286" y="168" width="12" height="100" rx="6" fill="#FFFFFF" opacity="0.28"/>
+    <rect x="268" y="290" width="64" height="200" rx="18" fill="url(#body-gloss-labial)"/>
+    <rect x="282" y="330" width="36" height="130" rx="14" fill="#6E42B5" opacity="0.35"/>
+    <rect x="280" y="318" width="12" height="140" rx="6" fill="#FFFFFF" opacity="0.28"/>
+</svg>

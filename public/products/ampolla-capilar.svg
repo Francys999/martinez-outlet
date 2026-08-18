@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-ampolla-capilar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-ampolla-capilar" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#B98FE8"/>
+    <stop offset="100%" stop-color="#8F63D2"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-ampolla-capilar)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#B98FE8" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#8F63D2" opacity="0.18"/>
+  
+    <path d="M282 118h36v66l30 62v208a26 26 0 0 1-26 26h-44a26 26 0 0 1-26-26V246l30-62z" fill="url(#body-ampolla-capilar)"/>
+    <rect x="276" y="104" width="48" height="26" rx="10" fill="#57318F"/>
+    <rect x="278" y="268" width="14" height="150" rx="7" fill="#FFFFFF" opacity="0.28"/>
+    <rect x="262" y="330" width="76" height="60" rx="10" fill="#FFFFFF" opacity="0.85"/>
+</svg>

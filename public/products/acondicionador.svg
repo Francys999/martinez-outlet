@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-acondicionador" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-acondicionador" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#B98FE8"/>
+    <stop offset="100%" stop-color="#8F63D2"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-acondicionador)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#B98FE8" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#8F63D2" opacity="0.18"/>
+  
+    <rect x="258" y="126" width="84" height="46" rx="12" fill="#57318F"/>
+    <rect x="286" y="112" width="28" height="20" rx="8" fill="#57318F" opacity="0.8"/>
+    <path d="M214 232c0-34 44-30 44-60h84c0 30 44 26 44 60v222a34 34 0 0 1-34 34H248a34 34 0 0 1-34-34z" fill="url(#body-acondicionador)"/>
+    <rect x="238" y="244" width="22" height="200" rx="11" fill="#FFFFFF" opacity="0.28"/>
+    
+  <rect x="216" y="300" width="168" height="128" rx="14" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="234" y="351" width="132" height="7" rx="3.5" fill="#57318F" opacity="0.55"/>
+  <rect x="234" y="366" width="79.2" height="7" rx="3.5" fill="#EC008C" opacity="0.5"/>
+</svg>

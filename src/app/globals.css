@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   MARTINEZ OUTLET — Design tokens
+   Paleta derivada del logo: lavanda / lila / morado / fucsia.
+   Algunos tonos se oscurecieron ligeramente respecto a la referencia para
+   cumplir contraste AA (texto blanco sobre fucsia, precios sobre blanco).
+   ========================================================================== */
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-brand), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* Neutros de marca */
+  --color-ink: #24152f;
+  --color-ink-soft: #5a4a69;
+  --color-ink-muted: #6f6280;
+
+  /* Lavanda → morado */
+  --color-lila-50: #faf7fe;
+  --color-lila-100: #f2eafc;
+  --color-lila-200: #e3d3f8;
+  --color-lila-300: #d2b9f2;
+  --color-lila-400: #b48fe8;
+  --color-lila-500: #9b6bd6;
+  --color-lila-600: #8253c7;
+  --color-lila-700: #6e42b5;
+  --color-lila-800: #57318f;
+
+  /* Fucsia / magenta */
+  --color-fucsia-100: #ffe4f2;
+  --color-fucsia-200: #ffc2e0;
+  --color-fucsia-300: #ff8cc6;
+  --color-fucsia-400: #f50087;
+  --color-fucsia-500: #ec008c;
+  --color-fucsia-600: #d1007a;
+  --color-fucsia-700: #b0006a;
+
+  /* Sombras muy sutiles */
+  --shadow-soft: 0 1px 2px rgba(36, 21, 47, 0.04),
+    0 8px 24px -12px rgba(110, 66, 181, 0.18);
+  --shadow-card: 0 1px 2px rgba(36, 21, 47, 0.05),
+    0 18px 40px -24px rgba(110, 66, 181, 0.35);
+  --shadow-drawer: -24px 0 60px -30px rgba(36, 21, 47, 0.35);
+
+  /* Animaciones */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-bump: bump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-toast-in: toast-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Offset para el navbar sticky al navegar por anclas */
+  section[id] {
+    scroll-margin-top: 84px;
+  }
+
+  ::selection {
+    background-color: var(--color-lila-200);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lila-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Revelado suave de secciones al hacer scroll */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-crema-hidratante" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-crema-hidratante" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#CBA9EE"/>
+    <stop offset="100%" stop-color="#A87FE0"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-crema-hidratante)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#CBA9EE" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#A87FE0" opacity="0.18"/>
+  
+    <rect x="176" y="216" width="248" height="86" rx="26" fill="#6E42B5"/>
+    <rect x="200" y="236" width="60" height="18" rx="9" fill="#FFFFFF" opacity="0.28"/>
+    <rect x="192" y="296" width="216" height="188" rx="30" fill="url(#body-crema-hidratante)"/>
+    <rect x="214" y="320" width="22" height="138" rx="11" fill="#FFFFFF" opacity="0.28"/>
+    
+  <rect x="216" y="350" width="168" height="100" rx="10" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="234" y="387" width="132" height="7" rx="3.5" fill="#6E42B5" opacity="0.55"/>
+  <rect x="234" y="402" width="79.2" height="7" rx="3.5" fill="#EC008C" opacity="0.5"/>
+</svg>

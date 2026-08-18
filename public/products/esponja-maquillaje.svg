@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-esponja-maquillaje" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-esponja-maquillaje" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FFA8D2"/>
+    <stop offset="100%" stop-color="#F050A6"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-esponja-maquillaje)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#FFA8D2" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#F050A6" opacity="0.18"/>
+  
+    <path d="M300 128c74 66 118 128 118 186 0 74-54 122-118 122s-118-48-118-122c0-58 44-120 118-186z" fill="url(#body-esponja-maquillaje)"/>
+    <path d="M246 274c-18 30-26 58-24 84" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="18" stroke-linecap="round" fill="none"/>
+</svg>

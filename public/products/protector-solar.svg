@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-protector-solar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-protector-solar" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#B98FE8"/>
+    <stop offset="100%" stop-color="#8F63D2"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-protector-solar)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#B98FE8" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#8F63D2" opacity="0.18"/>
+  
+    <path d="M244 168c0-14 8-24 22-30h68c14 6 22 16 22 30l14 254a26 26 0 0 1-26 28H256a26 26 0 0 1-26-28z" fill="url(#body-protector-solar)"/>
+    <rect x="262" y="118" width="76" height="34" rx="10" fill="#57318F"/>
+    <rect x="254" y="200" width="20" height="190" rx="10" fill="#FFFFFF" opacity="0.28"/>
+    
+  <rect x="246" y="276" width="110" height="120" rx="10" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="264" y="323" width="74" height="7" rx="3.5" fill="#57318F" opacity="0.55"/>
+  <rect x="264" y="338" width="44.4" height="7" rx="3.5" fill="#EC008C" opacity="0.5"/>
+</svg>

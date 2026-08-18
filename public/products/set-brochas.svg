@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-set-brochas" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-set-brochas" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#FF7CBC"/>
+    <stop offset="100%" stop-color="#EC008C"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-set-brochas)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#FF7CBC" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#EC008C" opacity="0.18"/>
+  
+    <g transform="rotate(-14 300 300)">
+      <rect x="196" y="150" width="46" height="180" rx="22" fill="#6E42B5"/>
+      <rect x="196" y="322" width="46" height="150" rx="14" fill="url(#body-set-brochas)"/>
+    </g>
+    <g>
+      <path d="M278 146c22 0 36 22 36 52 0 26-14 44-36 44s-36-18-36-44c0-30 14-52 36-52z" fill="#6E42B5"/>
+      <rect x="256" y="236" width="44" height="238" rx="16" fill="url(#body-set-brochas)"/>
+    </g>
+    <g transform="rotate(15 300 300)">
+      <rect x="356" y="158" width="44" height="164" rx="20" fill="#6E42B5" opacity="0.8"/>
+      <rect x="356" y="314" width="44" height="156" rx="14" fill="url(#body-set-brochas)"/>
+    </g>
+</svg>
