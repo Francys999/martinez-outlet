@@ -1,92 +1,58 @@
-import {
-  Brush,
-  Droplets,
-  ShowerHead,
-  Sparkles,
-  Tag,
-  Wind,
-  type LucideIcon,
-} from "lucide-react";
-import type { CategoryFilter, CategoryId } from "@/types/product";
+import type { Category } from "@/types/catalog";
 
-export interface Category {
-  /** "ofertas" no es una categoría real: filtra los productos con offer: true. */
-  id: CategoryFilter;
-  name: string;
-  description: string;
-  icon: LucideIcon;
-  /** Clases Tailwind del degradado suave de la tarjeta. */
-  tint: string;
-  /** Color del icono dentro de la tarjeta. */
-  iconClass: string;
-}
-
-/** Nombre visible de cada categoría real (usado en cards, filtros y modal). */
-export const CATEGORY_LABELS: Record<CategoryId, string> = {
-  skincare: "Skincare",
-  maquillaje: "Maquillaje",
-  "cuidado-capilar": "Cuidado capilar",
-  "aseo-personal": "Aseo personal",
-  accesorios: "Accesorios",
-};
+/* ==========================================================================
+ *  CATEGORÍAS
+ *
+ *  Para agregar una categoría:
+ *   1. Añade su `id` en CategoryId (src/types/catalog.ts).
+ *   2. Agrega el bloque aquí abajo, en el orden en que quieras que aparezca.
+ *   3. Usa ese `id` en el campo `category` de los productos.
+ *
+ *  El `icon` es un nombre de lucide-react. Los disponibles están en
+ *  src/components/store/CategoryGrid.tsx (CATEGORY_ICONS).
+ * ========================================================================== */
 
 export const categories: Category[] = [
   {
     id: "skincare",
     name: "Skincare",
-    description: "Productos para el cuidado de la piel.",
-    icon: Droplets,
-    tint: "from-lila-100 to-lila-200/70",
-    iconClass: "text-lila-700",
+    description: "Cuidado facial: limpieza, hidratación y protección.",
+    icon: "Droplets",
   },
   {
     id: "maquillaje",
-    name: "Maquillaje",
-    description: "Productos de maquillaje y belleza.",
-    icon: Sparkles,
-    tint: "from-fucsia-100 to-fucsia-200/70",
-    iconClass: "text-fucsia-700",
+    name: "Maquillaje y belleza",
+    description: "Labiales, bases, máscaras y todo para tu look.",
+    icon: "Sparkles",
   },
   {
-    id: "cuidado-capilar",
-    name: "Cuidado capilar",
-    description: "Shampoos, acondicionadores y tratamientos.",
-    icon: Wind,
-    tint: "from-lila-100 to-lila-300/60",
-    iconClass: "text-lila-800",
+    id: "joyeria",
+    name: "Joyería y accesorios",
+    description: "Aretes, collares, anillos y pulseras.",
+    icon: "Gem",
   },
   {
     id: "aseo-personal",
     name: "Aseo personal",
-    description: "Jabones, higiene y cuidado diario.",
-    icon: ShowerHead,
-    tint: "from-lila-50 to-lila-200/70",
-    iconClass: "text-lila-700",
+    description: "Jabones, cremas corporales e higiene diaria.",
+    icon: "ShowerHead",
   },
   {
-    id: "accesorios",
-    name: "Accesorios",
-    description: "Accesorios de belleza y cuidado personal.",
-    icon: Brush,
-    tint: "from-fucsia-100 to-lila-200/70",
-    iconClass: "text-fucsia-700",
+    id: "cuidado-capilar",
+    name: "Cuidado capilar",
+    description: "Shampoo, acondicionador y tratamientos.",
+    icon: "Wind",
   },
   {
-    id: "ofertas",
-    name: "Ofertas",
-    description: "Productos con precios especiales.",
-    icon: Tag,
-    tint: "from-fucsia-200/80 to-lila-200/70",
-    iconClass: "text-fucsia-700",
+    id: "mochilas-loncheras",
+    name: "Mochilas y loncheras",
+    description: "Mochilas, loncheras, cartucheras y termos.",
+    icon: "Backpack",
+  },
+  {
+    id: "bazar",
+    name: "Bazar y variedades",
+    description: "Accesorios de belleza y artículos prácticos.",
+    icon: "ShoppingBasket",
   },
 ];
-
-/** Opciones del selector de categoría del catálogo (incluye "Todas"). */
-export const CATEGORY_FILTER_OPTIONS: { value: CategoryFilter; label: string }[] =
-  [
-    { value: "all", label: "Todas las categorías" },
-    ...(Object.keys(CATEGORY_LABELS) as CategoryId[]).map((id) => ({
-      value: id as CategoryFilter,
-      label: CATEGORY_LABELS[id],
-    })),
-  ];

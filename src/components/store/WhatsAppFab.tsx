@@ -1,11 +1,11 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
-import { buildContactMessage } from "@/lib/whatsapp";
+import WhatsAppLink from "@/components/store/WhatsAppLink";
 import { useCart } from "@/context/CartContext";
+import { buildContactMessage } from "@/lib/whatsapp";
 
-/** Acceso directo a WhatsApp, siempre visible salvo con el carrito abierto. */
+/** Acceso directo a WhatsApp, salvo cuando el carrito está abierto. */
 export default function WhatsAppFab() {
   const { isOpen } = useCart();
 
@@ -15,14 +15,14 @@ export default function WhatsAppFab() {
         isOpen ? "pointer-events-none translate-y-4 opacity-0" : "opacity-100"
       }`}
     >
-      <WhatsAppButton
+      <WhatsAppLink
         message={buildContactMessage()}
         showIcon={false}
-        className="grid size-12 place-items-center sm:size-14 rounded-full bg-gradient-to-br from-fucsia-500 to-fucsia-700 text-white shadow-card transition-transform hover:scale-105 active:scale-95"
+        className="grid size-12 place-items-center rounded-full bg-gradient-to-br from-fucsia-500 to-fucsia-700 text-white shadow-card transition-transform hover:scale-105 active:scale-95 sm:size-14"
       >
         <MessageCircle className="size-5.5 sm:size-6" aria-hidden />
         <span className="sr-only">Escribir por WhatsApp</span>
-      </WhatsAppButton>
+      </WhatsAppLink>
     </div>
   );
 }

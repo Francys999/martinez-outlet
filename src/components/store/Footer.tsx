@@ -1,31 +1,33 @@
 "use client";
 
-import { Camera, MessageCircle, Music2, ThumbsUp } from "lucide-react";
+import Link from "next/link";
+import {
+  Camera,
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Music2,
+  ThumbsUp,
+} from "lucide-react";
 import Logo from "@/components/Logo";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import WhatsAppLink from "@/components/store/WhatsAppLink";
 import { buildContactMessage } from "@/lib/whatsapp";
-import { NAV_LINKS, SITE, SOCIAL_LINKS } from "@/lib/config";
-import { categories } from "@/data/categories";
-import { useCatalog } from "@/context/CatalogContext";
-import type { CategoryFilter } from "@/types/product";
+import { CONTACT_INFO, ONLINE_DISCOUNT_NOTE, SITE, SOCIAL_LINKS } from "@/lib/config";
+import type { CategoryListItem } from "@/types/catalog";
 
 // lucide-react v1 ya no incluye logos de marcas: usamos iconos neutros.
-const SOCIAL_ICONS = {
-  Instagram: Camera,
-  TikTok: Music2,
-  Facebook: ThumbsUp,
-} as const;
+const SOCIALS = [
+  { name: "Instagram", icon: Camera, url: SOCIAL_LINKS.instagram },
+  { name: "TikTok", icon: Music2, url: SOCIAL_LINKS.tiktok },
+  { name: "Facebook", icon: ThumbsUp, url: SOCIAL_LINKS.facebook },
+];
 
-export default function Footer() {
-  const { selectCategory } = useCatalog();
-
-  const goToCategory = (id: CategoryFilter) => {
-    selectCategory(id);
-    document
-      .getElementById("productos")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
+export default function Footer({
+  categories,
+}: {
+  categories: CategoryListItem[];
+}) {
   return (
     <footer className="bg-ink text-white">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
@@ -33,13 +35,13 @@ export default function Footer() {
           <div>
             <Logo size={52} light withWordmark />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-lila-200/80">
-              Productos de belleza, cuidado personal y aseo a precios accesibles.
-              Haz tu pedido fácil y rápido por WhatsApp.
+              {ONLINE_DISCOUNT_NOTE}
             </p>
 
             <div className="mt-5 flex gap-2">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = SOCIAL_ICONS[social.name];
+              {SOCIALS.map((social) => {
+                const Icon = social.icon;
+
                 if (!social.url) {
                   return (
                     <span
@@ -52,6 +54,7 @@ export default function Footer() {
                     </span>
                   );
                 }
+
                 return (
                   <a
                     key={social.name}
@@ -70,19 +73,49 @@ export default function Footer() {
 
           <nav aria-label="Navegación del pie de página">
             <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
-              Navegación
+              Tienda
             </h3>
-            <ul className="mt-4 space-y-2.5">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-lila-200/80 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li>
+                <Link
+                  href="/"
+                  className="text-lila-200/80 transition-colors hover:text-white"
+                >
+                  Inicio
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/catalogo"
+                  className="text-lila-200/80 transition-colors hover:text-white"
+                >
+                  Catálogo completo
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/catalogo?ofertas=1"
+                  className="text-lila-200/80 transition-colors hover:text-white"
+                >
+                  Ofertas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/#nosotros"
+                  className="text-lila-200/80 transition-colors hover:text-white"
+                >
+                  Nosotros
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/#contacto"
+                  className="text-lila-200/80 transition-colors hover:text-white"
+                >
+                  Contacto
+                </Link>
+              </li>
             </ul>
           </nav>
 
@@ -90,16 +123,15 @@ export default function Footer() {
             <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">
               Categorías
             </h3>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 space-y-2.5 text-sm">
               {categories.map((category) => (
                 <li key={category.id}>
-                  <button
-                    type="button"
-                    onClick={() => goToCategory(category.id)}
-                    className="text-left text-sm text-lila-200/80 transition-colors hover:text-white"
+                  <Link
+                    href={`/catalogo?categoria=${category.id}`}
+                    className="text-lila-200/80 transition-colors hover:text-white"
                   >
                     {category.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -113,14 +145,36 @@ export default function Footer() {
               Arma tu carrito en la web y envíanos el pedido por WhatsApp. Te
               confirmamos disponibilidad y entrega.
             </p>
-            <WhatsAppButton
+
+            <WhatsAppLink
               message={buildContactMessage()}
               showIcon={false}
               className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-fucsia-500 to-fucsia-600 px-5 text-sm font-semibold text-white transition-opacity hover:opacity-95"
             >
               <MessageCircle className="size-4" aria-hidden />
               Escríbenos
-            </WhatsAppButton>
+            </WhatsAppLink>
+
+            <ul className="mt-4 space-y-2 text-sm text-lila-200/80">
+              {CONTACT_INFO.address && (
+                <li className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
+                  {CONTACT_INFO.address}
+                </li>
+              )}
+              {CONTACT_INFO.schedule && (
+                <li className="flex items-start gap-2">
+                  <Clock className="mt-0.5 size-4 shrink-0" aria-hidden />
+                  {CONTACT_INFO.schedule}
+                </li>
+              )}
+              {CONTACT_INFO.email && (
+                <li className="flex items-start gap-2">
+                  <Mail className="mt-0.5 size-4 shrink-0" aria-hidden />
+                  {CONTACT_INFO.email}
+                </li>
+              )}
+            </ul>
           </div>
         </div>
 

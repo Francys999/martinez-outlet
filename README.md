@@ -1,10 +1,15 @@
 # Martinez Outlet — Catálogo web
 
-Catálogo online de productos de belleza, cuidado personal y aseo, con carrito
-frontend y pedidos por WhatsApp. **No** incluye pagos online, login ni backend.
+Catálogo online de belleza, skincare, joyería, aseo personal, mochilas y
+variedades, con carrito y pedidos por WhatsApp.
 
-Stack: Next.js 16 (App Router) · TypeScript · React 19 · Tailwind CSS v4 ·
-lucide-react.
+**Es 100% frontend**: no hay base de datos, ni panel administrativo, ni servidor
+propio. Todo el contenido vive en archivos dentro de `src/data` y se compila
+junto con la web.
+
+Stack: Next.js 16 · TypeScript · React 19 · Tailwind CSS v4 · lucide-react.
+
+---
 
 ## Ejecutar el proyecto
 
@@ -16,112 +21,164 @@ npm install
 npm run dev
 ```
 
-Luego abre http://localhost:3000
+Abre http://localhost:3000
 
-Otros comandos:
+Para publicar:
 
 ```bash
 npm run build
 ```
 
 ```bash
-npm run lint
+npm start
 ```
 
-## Lo que tienes que configurar
+---
 
-### 1. Número de WhatsApp (obligatorio)
+## Los 3 archivos que vas a editar
 
-Archivo: `src/lib/config.ts`
-
-```ts
-export const WHATSAPP_NUMBER = "519XXXXXXXXX"; // ← reemplázalo
-```
-
-Formato internacional, solo dígitos, sin `+`, sin espacios ni guiones.
-Perú: `51` + los 9 dígitos del celular → `51987654321`.
-
-Mientras el valor tenga "X", los botones de WhatsApp no abren el enlace: muestran
-un aviso indicando que falta configurar el número.
-
-### 2. Logo — ya configurado
-
-El logo está en `public/logo.png` (círculo con fondo transparente, 384×384, generado a
-partir de `public/logo.jpg`). Se usa en navbar, hero, "Sobre nosotros" y footer.
-En navbar y footer se muestra junto al nombre de la marca, porque el texto dentro
-del círculo sería ilegible a ese tamaño.
-
-Para cambiarlo, reemplaza `public/logo.png` por otro PNG (idealmente cuadrado y con
-fondo transparente). Si el archivo faltara, la web muestra un logotipo vectorial de
-respaldo en vez de romperse.
-
-### 3. Productos
-
-Archivo: `src/data/products.ts` — un solo arreglo con todos los productos.
+### 1. Productos → `src/data/products.ts`
 
 ```ts
 {
-  id: "skc-serum-vitamina-c",   // único
-  name: "Sérum Facial Vitamina C",
-  category: "skincare",          // skincare | maquillaje | cuidado-capilar | aseo-personal | accesorios
-  price: 39.9,
-  previousPrice: 55.0,           // opcional (precio tachado)
-  image: "/products/serum-facial.svg",
-  description: "…",
-  featured: true,                // opcional: aparece primero
-  offer: true,                   // opcional: badge de oferta + filtro "Ofertas"
-  size: "30 ml",                 // opcional
+  id: "aretes-argolla-dorados",   // único; es la URL: /producto/aretes-argolla-dorados
+  name: "Aretes Argolla Dorados",
+  category: "joyeria",            // debe existir en src/data/categories.ts
+  price: 16.9,                    // precio online (el que paga el cliente)
+  storePrice: 24,                 // precio en tienda: se muestra tachado (opcional)
+  images: ["/products/aretes.svg"],
+  description: "Argollas livianas de acabado dorado...",
+  stock: 24,                      // opcional: si lo omites, no se controla stock
+  featured: true,                 // opcional: sale en "Lo más pedido"
+  offer: true,                    // opcional: entra en Ofertas
+  variants: [                     // opcional: colores, modelos o tallas
+    { id: "medianas", type: "modelo", label: "Medianas (4 cm)", stock: 8 },
+  ],
 }
 ```
 
-Las imágenes van en `public/products/`. Las incluidas son ilustraciones propias
-en SVG (sin marcas registradas); puedes reemplazarlas por fotos reales
-(`.jpg` / `.webp`, preferiblemente cuadradas) y actualizar el campo `image`.
+Para **fotos reales**: copia la imagen a `public/products/` y apunta `images` a
+ella, por ejemplo `["/products/mi-foto.jpg"]`. Se recomiendan imágenes cuadradas.
+Las 36 ilustraciones incluidas son SVG propios (sin marcas registradas).
 
-### 4. Redes sociales, dirección y horarios
+### 2. Categorías → `src/data/categories.ts`
 
-Archivo: `src/lib/config.ts` → `SOCIAL_LINKS` y `CONTACT_INFO`.
-Están en `null` a propósito: no se inventó ningún dato. En cuanto pongas una URL
-o un texto, el enlace o el bloque aparece solo en la sección de contacto y en el
-footer.
+Las 7 actuales: Skincare · Maquillaje y belleza · Joyería y accesorios · Aseo
+personal · Cuidado capilar · Mochilas y loncheras · Bazar y variedades.
+
+Para agregar una nueva, añade su `id` en `CategoryId` (`src/types/catalog.ts`) y
+luego el bloque en este archivo.
+
+### 3. Anuncios del slider → `src/data/banners.ts`
+
+Los carteles de la portada. Admiten fechas, así que una campaña de temporada
+aparece y desaparece sola:
+
+```ts
+{
+  id: "navidad",
+  title: "Campaña de Navidad: 20% en joyería",
+  badge: "Navidad",
+  link: { type: "categoria", value: "joyeria" },
+  theme: "fucsia",
+  startsAt: "2026-12-01",
+  endsAt: "2026-12-26",
+}
+```
+
+### Datos del negocio → `src/lib/config.ts`
+
+Número de WhatsApp (ya configurado: `51996112905`), textos de la portada,
+redes sociales, dirección, horarios y correo. Las redes y los datos de contacto
+vacíos simplemente no se muestran.
+
+---
+
+## Cómo compra el cliente
+
+1. Entra y ve el catálogo (portada, `/catalogo` o por categoría).
+2. Abre un producto, elige color o modelo si lo tiene, y lo agrega al carrito.
+3. En el carrito ve el total y **cuánto ahorra comprando online**.
+4. Pulsa "Continuar", deja nombre, teléfono y una nota (opcional).
+5. Se abre WhatsApp con el pedido ya escrito: productos, cantidades, precios,
+   total y un código de referencia.
+
+El carrito se guarda en el navegador del cliente, así que no se pierde si cierra
+la página.
+
+---
+
+## Protecciones contra abuso y spam
+
+| Protección | Qué evita |
+|---|---|
+| **Precios recalculados** | El navegador solo guarda identificadores y cantidades. Nombres y precios salen siempre del catálogo, así que editar el almacenamiento local **no** permite fabricar precios ni productos falsos. |
+| **Campo trampa (honeypot)** | Un campo invisible que las personas no ven pero los bots rellenan. Si llega con texto, el pedido no se envía. |
+| **Tiempo mínimo** | Un formulario completado en menos de 3 segundos se descarta: es un robot. |
+| **Espera entre pedidos** | 45 segundos entre un envío y el siguiente. |
+| **Límite por hora y por día** | Máximo 5 pedidos por hora y 15 por día desde el mismo navegador. |
+| **Topes de cantidad** | Hasta 20 unidades por producto, 30 productos distintos y 120 unidades por pedido. Para más, se invita a escribir por WhatsApp. |
+| **Sin enlaces** | La nota del cliente no admite enlaces (el uso típico de spam) y se limpian los caracteres raros, para que nadie pueda "armar" un mensaje falso dentro del pedido. |
+| **Cabeceras de seguridad** | CSP, `X-Frame-Options: DENY` (no se puede incrustar la web en otra), `nosniff`, `Referrer-Policy` y `Permissions-Policy`. |
+| **Sin superficie de ataque** | No hay base de datos, ni login, ni formularios que envíen datos a ningún servidor: no hay nada que hackear ni información que robar. |
+
+Los límites viven en `src/lib/antispam.ts` y `src/lib/constants.ts`, por si
+quieres hacerlos más estrictos o más flexibles.
+
+**Importante, para que lo tengas claro:** como no hay servidor, los límites de
+frecuencia se guardan en el navegador de cada visitante. Detienen bots y envíos
+masivos normales, pero alguien con conocimientos técnicos podría saltárselos
+borrando sus datos de navegación. El filtro definitivo sigue siendo WhatsApp,
+donde puedes bloquear cualquier número que moleste. Si algún día el spam se
+vuelve un problema real, la solución sería un pequeño backend con límite por IP.
+
+---
 
 ## Estructura
 
 ```text
 src/
 ├── app/
-│   ├── layout.tsx           SEO, metadata, Open Graph, fuentes
-│   ├── page.tsx             composición de la landing
-│   ├── providers.tsx        carrito + filtros + avisos (client)
-│   ├── globals.css          design tokens de marca (Tailwind v4)
-│   ├── icon.svg             favicon
-│   └── opengraph-image.tsx  imagen para redes (generada)
+│   ├── (tienda)/
+│   │   ├── page.tsx           portada
+│   │   ├── catalogo/          catálogo con filtros
+│   │   └── producto/[slug]/   página de cada producto
+│   ├── layout.tsx             SEO y fuentes
+│   ├── icon.svg               favicon
+│   └── opengraph-image.tsx    imagen para redes
 ├── components/
-│   ├── Navbar · Hero · Categories · Catalog · Benefits · About · Contact · Footer
-│   ├── ProductCard · ProductGrid · ProductModal · SearchBar · Filters
-│   ├── Cart · CartItem · WhatsAppFab · Logo
-│   └── ui/  QuantityStepper · WhatsAppButton · SectionHeading · Reveal · Toaster
-├── context/
-│   ├── CartContext.tsx      carrito (localStorage, sin backend)
-│   └── CatalogContext.tsx   búsqueda, categoría, orden, ofertas
-├── data/
-│   ├── products.ts          👈 catálogo
-│   └── categories.ts
+│   ├── store/                 navbar, slider, tarjetas, carrito, secciones
+│   ├── ui/                    piezas compartidas
+│   └── Logo.tsx
+├── context/CartContext.tsx    carrito (navegador)
+├── data/                      👈 productos, categorías y anuncios
 ├── lib/
-│   ├── config.ts            👈 WhatsApp, redes, contacto
-│   ├── whatsapp.ts          armado del mensaje del pedido
-│   └── format.ts            precios (S/) y descuentos
-└── types/product.ts         Product, CartItem, filtros
+│   ├── config.ts              👈 WhatsApp, textos, redes, contacto
+│   ├── catalog.ts             filtros, búsqueda y resolución del carrito
+│   ├── antispam.ts            protecciones contra abuso
+│   ├── whatsapp.ts            armado del mensaje del pedido
+│   ├── format.ts              precios (S/) y descuentos
+│   └── constants.ts           límites y etiquetas
+└── types/catalog.ts           tipos del catálogo
 ```
 
-## Preparado para una versión futura con backend
+El logo está en `public/logo.png`. Si lo cambias, se actualiza en toda la web.
 
-- `src/types/product.ts` define el contrato de datos: basta con que la API
-  devuelva la misma forma para reemplazar `src/data/products.ts`.
-- `src/data/products.ts` está aislado: ningún componente tiene productos
-  hardcodeados.
-- `src/lib/config.ts` centraliza los datos del negocio (número, redes, contacto).
-- El carrito vive en `CartContext` con una API mínima (`addItem`, `removeItem`,
-  `updateQuantity`, `clearCart`), fácil de conectar luego a un backend de pedidos.
-- `buildOrderMessage()` genera el pedido a partir del carrito: el mismo objeto
-  puede enviarse a una API cuando exista.
+---
+
+## Publicar
+
+Al ser un sitio estático, se puede publicar en cualquier lado: **Vercel**,
+Netlify, o un hosting propio con `npm run build && npm start`. No necesita base
+de datos, ni variables de entorno, ni configuración adicional.
+
+La portada y las 36 páginas de producto se generan al compilar, así que cargan
+de inmediato.
+
+---
+
+## Lo que no incluye (a propósito)
+
+Panel administrativo, base de datos, pasarela de pagos y cuentas de clientes.
+Para cambiar el catálogo se editan los archivos de `src/data` y se vuelve a
+publicar.

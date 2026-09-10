@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-aretes-perla" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-aretes-perla" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#DCC8F7"/>
+    <stop offset="100%" stop-color="#B99AEC"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-aretes-perla)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#DCC8F7" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#B99AEC" opacity="0.18"/>
+  
+    <g>
+      <path d="M212 150a26 26 0 1 1 52 0" stroke="#6E42B5" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <circle cx="238" cy="250" r="66" fill="url(#body-aretes-perla)"/>
+      <circle cx="238" cy="250" r="34" fill="#FFFFFF" opacity="0.6"/>
+      <path d="M238 176v-26" stroke="#6E42B5" stroke-width="10" stroke-linecap="round"/>
+    </g>
+    <g>
+      <path d="M336 210a26 26 0 1 1 52 0" stroke="#6E42B5" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <path d="M362 236l58 92a58 58 0 0 1-116 0z" fill="url(#body-aretes-perla)"/>
+      <circle cx="362" cy="300" r="22" fill="#FFFFFF" opacity="0.55"/>
+    </g>
+    <circle cx="238" cy="404" r="14" fill="#EC008C" opacity="0.6"/>
+    <circle cx="362" cy="424" r="10" fill="#EC008C" opacity="0.45"/>
+</svg>

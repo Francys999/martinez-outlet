@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-termo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-termo" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#DCC8F7"/>
+    <stop offset="100%" stop-color="#B99AEC"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-termo)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#DCC8F7" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#B99AEC" opacity="0.18"/>
+  
+    <rect x="256" y="106" width="88" height="52" rx="16" fill="#6E42B5"/>
+    <rect x="232" y="152" width="136" height="336" rx="46" fill="url(#body-termo)"/>
+    <rect x="232" y="266" width="136" height="118" fill="#FFFFFF" opacity="0.85"/>
+    <rect x="266" y="300" width="68" height="14" rx="7" fill="#6E42B5" opacity="0.5"/>
+    <rect x="266" y="326" width="44" height="14" rx="7" fill="#EC008C" opacity="0.5"/>
+    <rect x="254" y="186" width="22" height="250" rx="11" fill="#FFFFFF" opacity="0.28"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-cartuchera" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-cartuchera" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#CBA9EE"/>
+    <stop offset="100%" stop-color="#A87FE0"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-cartuchera)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#CBA9EE" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#A87FE0" opacity="0.18"/>
+  
+    <path d="M164 258h272a56 56 0 0 1 56 56v72a56 56 0 0 1-56 56H164a56 56 0 0 1-56-56v-72a56 56 0 0 1 56-56z" fill="url(#body-cartuchera)"/>
+    <path d="M108 322h384" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="20"/>
+    <circle cx="392" cy="322" r="26" fill="#6E42B5"/>
+    <path d="M392 322h64" stroke="#6E42B5" stroke-width="14" stroke-linecap="round"/>
+    <rect x="146" y="356" width="24" height="62" rx="12" fill="#FFFFFF" opacity="0.28"/>
+</svg>

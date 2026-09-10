@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img">
+  <defs>
+    <linearGradient id="bg-collar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCF8FF"/>
+      <stop offset="100%" stop-color="#F0E6FB"/>
+    </linearGradient>
+  <linearGradient id="body-collar" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#F7DFA6"/>
+    <stop offset="100%" stop-color="#E0B95C"/>
+  </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg-collar)"/>
+  <circle cx="300" cy="312" r="212" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="452" cy="140" r="58" fill="#F7DFA6" opacity="0.35"/>
+  <circle cx="132" cy="470" r="76" fill="#E0B95C" opacity="0.18"/>
+  
+    <path d="M156 176c0 130 64 214 144 214s144-84 144-214" stroke="url(#body-collar)" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <circle cx="300" cy="404" r="52" fill="url(#body-collar)"/>
+    <path d="M300 372c14 16 22 26 22 36a22 22 0 0 1-44 0c0-10 8-20 22-36z" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="196" cy="238" r="10" fill="#EC008C" opacity="0.7"/>
+    <circle cx="404" cy="238" r="10" fill="#EC008C" opacity="0.7"/>
+</svg>
