@@ -1,10 +1,10 @@
-import { SITE, WHATSAPP_NUMBER } from "@/lib/config";
+import { CURRENCY_SYMBOL, DELIVERY_ZONE, SITE, WHATSAPP_NUMBER } from "@/lib/config";
 import { formatPrice } from "@/lib/format";
 import type { ResolvedCartLine } from "@/types/catalog";
 
 /* --------------------------------------------------------------------------
  * Armado del mensaje de WhatsApp. Funciones puras: reciben las líneas ya
- * resueltas contra el catálogo (nunca datos sueltos del navegador).
+ * resueltas contra el catálogo, nunca datos sueltos del navegador.
  * ------------------------------------------------------------------------ */
 
 export function isWhatsAppConfigured(): boolean {
@@ -23,7 +23,7 @@ export function cartCount(lines: ResolvedCartLine[]): number {
   return lines.reduce((sum, line) => sum + line.quantity, 0);
 }
 
-/** Ahorro total frente al precio de tienda. */
+/** Ahorro total frente al precio de mercado. */
 export function cartSaving(lines: ResolvedCartLine[]): number {
   return lines.reduce((sum, line) => {
     if (!line.storePrice || line.storePrice <= line.unitPrice) return sum;
@@ -31,74 +31,66 @@ export function cartSaving(lines: ResolvedCartLine[]): number {
   }, 0);
 }
 
-export interface OrderMessageParams {
-  lines: ResolvedCartLine[];
-  /** Código de referencia del pedido. */
-  reference?: string | null;
-  customerName?: string | null;
-  note?: string | null;
-}
-
 /**
  * Mensaje del pedido:
  *
- *   Hola, Martinez Outlet 👋
- *   Quiero realizar el siguiente pedido:
- *
- *   🛍️ Aretes Argolla Dorados (Medianas)
- *   Cantidad: 2
- *   Precio: S/ 16.90
- *
- *   Total estimado: S/ 33.80
+ *   ¡Hola Martinez Outlet! Quiero realizar el siguiente pedido:
+ *   - Sérum Facial Vitamina C x2 - S/ 79.80
+ *   - Aretes Argolla Dorados (Medianas) x1 - S/ 16.90
+ *   Total a pagar: S/ 96.70
+ *   Ubicación de entrega: Ate - Envío Gratis
  */
 export function buildOrderMessage({
   lines,
-  reference,
-  customerName,
+  zone,
   note,
-}: OrderMessageParams): string {
+}: {
+  lines: ResolvedCartLine[];
+  /** Barrio o zona que escribe el cliente. */
+  zone?: string | null;
+  note?: string | null;
+}): string {
   const parts: string[] = [
-    `Hola, ${SITE.name} 👋`,
-    "Quiero realizar el siguiente pedido:",
-    "",
+    `¡Hola ${SITE.name}! Quiero realizar el siguiente pedido:`,
   ];
 
   for (const line of lines) {
     const name = line.variantLabel
       ? `${line.name} (${line.variantLabel})`
       : line.name;
-    parts.push(`🛍️ ${name}`);
-    parts.push(`Cantidad: ${line.quantity}`);
-    parts.push(`Precio: ${formatPrice(line.unitPrice)}`);
-    parts.push("");
+    parts.push(`- ${name} x${line.quantity} - ${formatPrice(line.subtotal)}`);
   }
 
-  parts.push(`Total estimado: ${formatPrice(cartTotal(lines))}`);
+  parts.push(`Total a pagar: ${formatPrice(cartTotal(lines))}`);
+
+  const zoneText = zone?.trim() || DELIVERY_ZONE;
+  parts.push(
+    zoneText
+      ? `Ubicación de entrega: ${zoneText} - Envío Gratis`
+      : "Ubicación de entrega: (indicar zona) - Envío Gratis",
+  );
+
+  if (note) parts.push(`Nota: ${note}`);
 
   const saving = cartSaving(lines);
   if (saving > 0) {
-    parts.push(`(Ahorro por comprar online: ${formatPrice(saving)})`);
+    parts.push(`(Ahorro frente al precio de mercado: ${formatPrice(saving)})`);
   }
-
-  if (reference) {
-    parts.push("");
-    parts.push(`Referencia: ${reference}`);
-  }
-  if (customerName) parts.push(`Mi nombre: ${customerName}`);
-  if (note) parts.push(`Nota: ${note}`);
-
-  parts.push("");
-  parts.push("¿Podrían confirmarme disponibilidad y forma de entrega?");
 
   return parts.join("\n");
 }
 
-/** Consulta por un producto puntual, desde su página de detalle. */
+/** Consulta por un producto puntual. */
 export function buildProductMessage(line: ResolvedCartLine): string {
-  return buildOrderMessage({ lines: [line] });
+  const name = line.variantLabel
+    ? `${line.name} (${line.variantLabel})`
+    : line.name;
+  return `¡Hola ${SITE.name}! Quiero consultar por: ${name} (${CURRENCY_SYMBOL} ${line.unitPrice.toFixed(
+    2,
+  )})`;
 }
 
 /** Mensaje genérico para los botones de contacto. */
 export function buildContactMessage(): string {
-  return `Hola, ${SITE.name} 👋 Quisiera hacer una consulta sobre sus productos.`;
+  return `¡Hola ${SITE.name}! Vi su catálogo y quiero hacer una consulta.`;
 }

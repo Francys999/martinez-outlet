@@ -31,24 +31,24 @@ export interface ProductVariant {
 
 /** Producto tal como se escribe en src/data/products.ts. */
 export interface Product {
-  /** Identificador único y estable; también es la URL: /producto/{id}. */
+  /** Identificador único y estable. */
   id: string;
   name: string;
   category: CategoryId;
-  /** Precio online: el que paga el cliente comprando por la web. */
+  /** Precio Martinez Outlet: el que paga el cliente. */
   price: number;
-  /** Precio en tienda. Si es mayor que `price`, se muestra tachado. */
+  /** Precio de mercado. Si es mayor que `price`, se muestra tachado. */
   storePrice?: number;
   images: string[];
   description: string;
   /** Presentación: "30 ml", "Pack x2"... */
   size?: string;
   brand?: string;
-  /** Unidades disponibles. Si se omite, no se controla stock. */
+  /** Unidades disponibles. Con 5 o menos se muestra el aviso de escasez. */
   stock?: number;
-  /** Aparece primero y en la portada. */
+  /** Aparece primero en la vitrina. */
   featured?: boolean;
-  /** Muestra la etiqueta de oferta y entra en el filtro "Ofertas". */
+  /** Marca el producto como oferta. */
   offer?: boolean;
   variants?: ProductVariant[];
 }
@@ -61,36 +61,16 @@ export interface Category {
   icon: string;
 }
 
-export interface Banner {
-  id: string;
-  title: string;
-  subtitle?: string;
-  /** Etiqueta corta: "Navidad", "-30%", "Nuevo". */
-  badge?: string;
-  ctaLabel?: string;
-  /** A dónde lleva el botón. */
-  link:
-    | { type: "catalogo" }
-    | { type: "ofertas" }
-    | { type: "categoria"; value: CategoryId }
-    | { type: "producto"; value: string }
-    | { type: "whatsapp" };
-  theme: "lila" | "fucsia" | "oscuro" | "claro";
-  /** Fechas opcionales de campaña, en formato "2026-12-01". */
-  startsAt?: string;
-  endsAt?: string;
-  active?: boolean;
-}
-
 /* ----------------------------- Vistas del UI ------------------------------ */
 
-/** Producto listo para pintar en una tarjeta. */
-export interface ProductListItem {
+/** Producto listo para pintar, con todo lo que necesita la tarjeta y la vista rápida. */
+export interface ProductDetail {
   id: string;
   name: string;
   price: number;
   storePrice: number | null;
   image: string | null;
+  images: string[];
   categoryId: CategoryId;
   categoryName: string;
   size: string | null;
@@ -100,19 +80,11 @@ export interface ProductListItem {
   /** Unidades disponibles; null cuando no se controla stock. */
   stock: number | null;
   variantCount: number;
-}
-
-export interface ProductDetail extends ProductListItem {
   description: string;
-  images: string[];
   variants: ProductVariant[];
 }
 
-export interface CategoryListItem extends Category {
-  productCount: number;
-}
-
-/** Línea del carrito (se guarda en el navegador). */
+/** Línea del carrito tal como se guarda en el navegador. */
 export interface CartLine {
   productId: string;
   variantId: string | null;
@@ -133,10 +105,3 @@ export interface ResolvedCartLine {
   maxStock: number | null;
   subtotal: number;
 }
-
-export type ProductSort =
-  | "destacados"
-  | "precio-asc"
-  | "precio-desc"
-  | "nombre-asc"
-  | "nombre-desc";

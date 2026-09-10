@@ -6,17 +6,20 @@ import type { Product } from "@/types/catalog";
  *  👉 Este es el único archivo que necesitas tocar para cambiar la tienda.
  *
  *  Agregar un producto: copia un bloque y cambia sus datos.
- *    - `id`: único y sin espacios. Es también la URL: /producto/{id}
- *    - `price`: precio online (el que paga el cliente por la web).
- *    - `storePrice`: precio en tienda. Se muestra tachado y se calcula el
- *      ahorro. Déjalo fuera si el producto no tiene precio de tienda.
- *    - `images`: rutas dentro de /public. Puedes poner varias.
- *    - `stock`: unidades disponibles. Si lo omites, no se controla stock.
- *    - `featured: true`: aparece en "Lo más pedido" de la portada.
- *    - `offer: true`: entra en la sección y el filtro de Ofertas.
+ *    - `id`: único y sin espacios.
+ *    - `price`: PRECIO MARTINEZ OUTLET (el que paga el cliente).
+ *    - `storePrice`: PRECIO DE MERCADO. Se muestra tachado y con él se
+ *      calcula el % de descuento del badge. Ponlo siempre que puedas:
+ *      la comparación es lo que más vende.
+ *    - `images`: rutas dentro de /public. La primera es la portada.
+ *    - `stock`: unidades disponibles. Con 5 o menos aparece el aviso
+ *      "¡Últimas X unidades!". Con 0 el producto sale como agotado.
+ *      Si omites el campo, no se controla stock.
+ *    - `featured: true`: aparece primero en la vitrina.
+ *    - `offer: true`: marca el producto como oferta.
  *    - `variants`: colores, modelos o tallas, cada uno con su stock.
  *
- *  Quitar un producto: borra su bloque (o pon `stock: 0` para "agotado").
+ *  Quitar un producto: borra su bloque.
  * ========================================================================== */
 
 export const products: Product[] = [
@@ -31,7 +34,7 @@ export const products: Product[] = [
     description:
       "Sérum ligero con vitamina C que ayuda a unificar el tono y aportar luminosidad. Se absorbe rápido y se usa antes de la crema hidratante.",
     size: "30 ml",
-    stock: 18,
+    stock: 4,
     featured: true,
     offer: true,
   },
@@ -360,7 +363,7 @@ export const products: Product[] = [
     description:
       "Mascarilla de tratamiento profundo para cabello con frizz o quiebre. Se aplica de 1 a 2 veces por semana.",
     size: "250 ml",
-    stock: 13,
+    stock: 3,
     featured: true,
     offer: true,
   },
@@ -455,7 +458,7 @@ export const products: Product[] = [
     description:
       "Termo de doble pared que conserva la temperatura por horas. Tapa hermética antiderrames.",
     size: "500 ml",
-    stock: 16,
+    stock: 4,
     offer: true,
   },
 
@@ -469,7 +472,7 @@ export const products: Product[] = [
     images: ["/products/set-brochas.svg"],
     description:
       "Set de 5 brochas de fibras suaves para rostro y ojos. Incluye brocha para base, polvo, rubor y difuminado.",
-    stock: 15,
+    stock: 5,
     featured: true,
     offer: true,
   },

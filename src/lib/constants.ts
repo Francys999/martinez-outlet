@@ -1,20 +1,4 @@
-import type { ProductSort, VariantType } from "@/types/catalog";
-
-export const PRODUCT_SORTS: ProductSort[] = [
-  "destacados",
-  "precio-asc",
-  "precio-desc",
-  "nombre-asc",
-  "nombre-desc",
-];
-
-export const PRODUCT_SORT_LABELS: Record<ProductSort, string> = {
-  destacados: "Destacados",
-  "precio-asc": "Precio: menor a mayor",
-  "precio-desc": "Precio: mayor a menor",
-  "nombre-asc": "Nombre: A - Z",
-  "nombre-desc": "Nombre: Z - A",
-};
+import type { VariantType } from "@/types/catalog";
 
 export const VARIANT_TYPE_LABELS: Record<VariantType, string> = {
   color: "Color",
@@ -23,7 +7,10 @@ export const VARIANT_TYPE_LABELS: Record<VariantType, string> = {
   otro: "Opción",
 };
 
-/* ------------------------- Límites del carrito ---------------------------- */
+/* ------------------------- Límites del carrito ----------------------------
+ * Frenan pedidos absurdos y los intentos automatizados de saturar el
+ * WhatsApp del negocio.
+ * ------------------------------------------------------------------------ */
 
 /** Máximo de unidades de un mismo producto. */
 export const MAX_QUANTITY_PER_LINE = 20;

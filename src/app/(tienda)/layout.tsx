@@ -1,26 +1,23 @@
-import { getCategories } from "@/lib/catalog";
 import { CartProvider } from "@/context/CartContext";
 import { ToastProvider } from "@/components/ui/Toaster";
-import Navbar from "@/components/store/Navbar";
-import Footer from "@/components/store/Footer";
-import CartDrawer from "@/components/store/CartDrawer";
-import WhatsAppFab from "@/components/store/WhatsAppFab";
+import TopBar from "@/components/store/TopBar";
+import StoreHeader from "@/components/store/StoreHeader";
+import CartModal from "@/components/store/CartModal";
+import FloatingCart from "@/components/store/FloatingCart";
 
 export default function TiendaLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const categories = getCategories();
-
   return (
     <ToastProvider>
       <CartProvider>
-        <Navbar categories={categories} />
+        <TopBar />
+        <StoreHeader />
         <main>{children}</main>
-        <Footer categories={categories} />
-        <CartDrawer />
-        <WhatsAppFab />
+        <FloatingCart />
+        <CartModal />
       </CartProvider>
     </ToastProvider>
   );

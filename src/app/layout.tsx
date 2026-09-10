@@ -19,7 +19,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Martinez Outlet | Belleza, Skincare, Joyería y Más",
+    default: "Martinez Outlet | Outlet de Belleza, Skincare y Accesorios",
     template: "%s | Martinez Outlet",
   },
   description: SITE.description,
@@ -42,12 +42,12 @@ export const metadata: Metadata = {
     locale: "es_PE",
     url: SITE.url,
     siteName: SITE.name,
-    title: "Martinez Outlet | Belleza, Skincare, Joyería y Más",
+    title: "Martinez Outlet | Outlet de Belleza, Skincare y Accesorios",
     description: SITE.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Martinez Outlet | Belleza, Skincare, Joyería y Más",
+    title: "Martinez Outlet | Outlet de Belleza, Skincare y Accesorios",
     description: SITE.description,
   },
   robots: { index: true, follow: true },

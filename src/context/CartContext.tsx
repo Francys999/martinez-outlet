@@ -174,7 +174,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         );
       });
 
-      setIsOpen(true);
+      // No se abre el carrito al agregar: el cliente sigue comprando y ve el
+      // total actualizado en la barra flotante.
       return message;
     },
     [],
