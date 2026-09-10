@@ -1,0 +1,12 @@
+# Archivos binarios: Git no debe tocar sus saltos de linea (los corrompe).
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+
+# El resto: normalizar a LF dentro del repositorio.
+* text=auto eol=lf

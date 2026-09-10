@@ -273,6 +273,7 @@ export default function CartModal() {
                   <input
                     id="zona-entrega"
                     value={zone}
+                    maxLength={60}
                     onChange={(event) => setZone(event.target.value.slice(0, 60))}
                     placeholder="Tu distrito o barrio"
                     tabIndex={isOpen ? 0 : -1}

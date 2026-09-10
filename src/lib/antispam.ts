@@ -140,12 +140,13 @@ export function looksAutomated({ honeypot, openedAt }: BotCheckInput): boolean {
 /* ------------------------- Limpieza de texto ------------------------------ */
 
 /**
- * Detecta enlaces. Cubre el protocolo, el "www." y los dominios más usados
- * para spam. Una nota de pedido normal no lleva enlaces, así que su presencia
- * es una señal clara.
+ * Detecta enlaces de forma genérica: el protocolo (aunque venga cortado), el
+ * "www." y cualquier dominio del tipo `palabra.ext`, incluidos los acortadores
+ * (bit.ly, t.me). Un dato de entrega normal no lleva puntos pegados a letras,
+ * así que un acierto aquí es señal clara de spam.
  */
 const URL_PATTERN =
-  /(https?:\/\/\S+|www\.\S+|\b[a-z0-9-]{2,}\.(com|net|org|io|co|pe|es|mx|ar|cl|xyz|top|ru|cn|link|shop|store|info|biz|online|site|app|me|club|live|vip|tk|ml|ga|cf|gq|bet|casino|example)\b\S*)/gi;
+  /(https?:\/\/|www\.|\b[a-z0-9][a-z0-9-]{0,40}\.[a-z]{2,12}\b)/gi;
 
 /** true si el texto contiene algo que parece un enlace. */
 export function containsLink(value: string): boolean {
